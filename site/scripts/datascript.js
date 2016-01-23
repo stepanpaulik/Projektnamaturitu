@@ -12,7 +12,7 @@ function parseData_json() {
         var deathratio = (search("total_kills", data_json) / search("total_deaths", data_json)).toFixed(2);
         $('#killdeathratio_inner').html('<h3 id="killdeathratio_number">' + deathratio + '</h3>')
         
-        var accuracy = (search("total_shots_hit", data_json) * 100 / search("total_shots_fired", data_json)).toFixed(1);
+        var accuracy = (search("total_shots_hit", data_json) * 100 / search("total_shots_fired", data_json)).toFixed(1);;
         $('#accuracy').html('<h2>Accuracy</h2><h1>' + accuracy + '%</h1>')
         
         $('#totalkills').html('<h2>Total Kills</h2><h1>' + search("total_kills", data_json) + '</h1>');
@@ -22,7 +22,8 @@ function parseData_json() {
         var timeplayed = (search("total_time_played", data_json) / 3600).toFixed(0);
         $('#timeplayed').html('<h2>Time Played</h2><h1>' + timeplayed + 'h</h1>');
         
-        var winrate = (search("total_matches_wons", data_json) * 100 / search("total_matches_played", data_json)).toFixed(1);
+        var winrate = (search("total_matches_won", data_json) * 100 / search("total_matches_played", data_json)).toFixed(1);
+        console.log(winrate);
         $('#winrate').html('<h2>Winrate</h2><h1>' + winrate + '%</h1>');
 
         var totkd = (search("total_kills", data_json) * 100)/(search("total_kills", data_json) + search("total_deaths", data_json));
