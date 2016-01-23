@@ -9,26 +9,26 @@ $( document ).ready(function() {
 function parseData_json() {
     $.getJSON( '/steam/stats/' + SteamID, function(data_json) {
         
-        console.log(data_json.playerstats.stats)
-        
-        var deathratio = (data_json.playerstats.stats[0].value / data_json.playerstats.stats[1].value).toFixed(2);
+        var deathratio = (search("total_kills", data_json) / search("total_deaths", data_json)).toFixed(2);
         $('#killdeathratio_inner').html('<h3 id="killdeathratio_number">' + deathratio + '</h3>')
         
-        var accuracy = (data_json.playerstats.stats[44].value * 100 / data_json.playerstats.stats[45].value).toFixed(1);
+        var accuracy = (search("total_shots_hit", data_json) * 100 / search("total_shots_fired", data_json)).toFixed(1);
         $('#accuracy').html('<h2>Accuracy</h2><h1>' + accuracy + '%</h1>')
         
-        $('#totalkills').html('<h2>Total Kills</h2><h1>' + data_json.playerstats.stats[0].value + '</h1>');
+        $('#totalkills').html('<h2>Total Kills</h2><h1>' + search("total_kills", data_json) + '</h1>');
         
-        $('#headshot').html('<h2>Headshots</h2><h1>' + data_json.playerstats.stats[24].value + '</h1>');
+        $('#headshot').html('<h2>Headshots</h2><h1>' + search("total_kills_headshot", data_json) + '</h1>');
         
-        var timeplayed = (data_json.playerstats.stats[2].value / 3600).toFixed(0);
+        var timeplayed = (search("total_time_played", data_json) / 3600).toFixed(0);
         $('#timeplayed').html('<h2>Time Played</h2><h1>' + timeplayed + 'h</h1>');
         
-        var winrate = (data_json.playerstats.stats[118].value * 100 / data_json.playerstats.stats[119].value).toFixed(1);
+        var winrate = (search("total_matches_wons", data_json) * 100 / search("total_matches_played", data_json)).toFixed(1);
         $('#winrate').html('<h2>Winrate</h2><h1>' + winrate + '%</h1>');
 
-        var totkd = (data_json.playerstats.stats[0].value * 100)/(data_json.playerstats.stats[0].value + data_json.playerstats.stats[1].value);
+        var totkd = (search("total_kills", data_json) * 100)/(search("total_kills", data_json) + search("total_deaths", data_json));
         $('#killdeathratio_inner').css({width: totkd+"%"})
+        
+        console.log(data_json);
      });
 };
 
@@ -41,4 +41,14 @@ $.urlParam = function(name){
     else{
        return results[1] || 0;
     }
+}
+function search(val, json){
+        for(var i = 0; i<=json.playerstats.stats.length; i++){
+            if(val === undefined || val === null){
+                return 0;
+            }else if(val == json.playerstats.stats[i].name){
+                return json.playerstats.stats[i].value;
+            }
+        }
+        return 0;
 }
