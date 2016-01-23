@@ -1,0 +1,141 @@
+ 
+
+body{
+    background: black;
+    font-family: 'Roboto';
+    font-weight: 100;
+    margin: 0;
+    padding: 0;
+    color: white;
+}
+h2 {
+    padding: 0;
+    margin: 0;
+    
+}
+h3 {
+    margin: 0; 
+    padding: 0;
+}
+* {
+  box-sizing: border-box;
+}
+
+#logo{
+    position: absolute;
+    left: 20px;
+    top: 20px;
+}
+#center{
+   position: absolute;
+   top: 50%;
+   margin-top: -65px;
+   left: 0;
+   width: 100%;
+}
+.container{
+    background: red;
+    height: 30px;
+    display: inline-block;
+}
+#container_data{
+    height: 600px;
+    width: 1200px;
+    background-color: black;
+    margin: 0 auto;
+    margin-top: 5%;
+}
+#search{
+    margin: 0 auto;
+    width: 550px;
+    text-align: center;
+}
+#search h1{
+        color: white;
+        font-weight: 100;
+        font-size: 2rem;
+        
+    }
+#search input[type="text"]{
+        color: #052F43;
+        width:89%;
+        height: 35px;
+        background-color: white;
+        padding-left: 5px;
+        transition: all .5s;
+        display: inline-block;
+        border: 0;
+        vertical-align: top;
+        outline: 0;
+    }
+#search input[type="text"]:focus {
+        box-shadow: inset black 0px 0px 5px;
+        outline: 0;
+    }
+
+    #search input[type="submit"]{
+        width: 10%;
+        display: inline-block;
+        height: 35px;
+        background: white;
+        border: 0;
+        cursor: pointer;
+        color: #052F43;
+        font-size: 1.3rem;
+        vertical-align: top;
+        transition: all .5s;
+    }
+#search input[type="submit"]:hover{
+        box-shadow: inset black 0px 0px 5px;       
+    }
+#killdeathratio{
+    height: 100px;
+    width: 800px;
+    margin: 0 auto;
+    padding: 0;
+}
+#killdeathratio_outer{
+    background-color: black;
+    border: 2px solid white;
+    height: 30px;
+    width: 800px;
+}
+#killdeathratio_inner{
+    background-color:white;
+    height: 30px;
+    position: relative;
+    top: -30px;
+}
+#killdeathratio_number{
+    color: black;
+    position: relative;
+    top: 2px;
+    padding-left: 5px;
+}
+#mainstats{
+    height: 60px;
+    width: 800px;
+    margin: 0 auto;
+}
+.mainstat{
+    width: 150px;
+    height: inherit;
+    display:inline-block;
+    border-left: 1px solid white;
+}
+.mainstat h2{
+    padding: 0 0 0 7px;
+    margin: 0;
+    margin-top: -2px;
+}
+.mainstat h1{
+    padding: 0 0 0 7px;
+    margin: 0;
+    color: #0e75ec;
+    margin-top: -10px !important;
+}
+@media screen and (max-width: 560px){
+    #search{
+        width: 100%;
+    }
+}

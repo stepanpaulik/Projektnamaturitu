@@ -1,0 +1,14 @@
+{
+// Configure your Run and Preview buttons here.
+
+// Run button configuration
+  "commands": {
+        "Time": "date"
+  },
+    
+// Preview button configuration
+  "preview": {
+        "Project Index": "http://{{domain}}/{{index}}",
+        "Current File": "http://{{domain}}/{{filepath}}"
+}
+}
