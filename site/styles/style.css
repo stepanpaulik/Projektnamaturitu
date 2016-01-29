@@ -7,6 +7,7 @@ body{
     margin: 0;
     padding: 0;
     color: white;
+    
 }
 h2 {
     padding: 0;
@@ -21,11 +22,6 @@ h3 {
   box-sizing: border-box;
 }
 
-#logo{
-    position: absolute;
-    left: 20px;
-    top: 20px;
-}
 #center{
    position: absolute;
    top: 50%;
@@ -34,16 +30,47 @@ h3 {
    width: 100%;
 }
 .container{
+    height: 30px;
+    display: inline-block;
+}
+
+#logo{
+    position: absolute;
+    left: 20px;
+    top: 20px;
+}
+#profile{
+    width: 100%;
+}
+#profilepic{
+    margin: 0 auto;
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    border: 2px solid white;
+    
+    
+}
+#profilename{
+    width: 100%;
+    text-align: center;
+    margin-top: -30px;
+}
+#profilename h1{
+    font-weight: 100 !important;
+    font-size: 60px;
+}
+.container{
     background: red;
     height: 30px;
     display: inline-block;
 }
 #container_data{
     height: 600px;
-    width: 1200px;
+    width: 800px;;
     background-color: black;
     margin: 0 auto;
-    margin-top: 5%;
+    margin-top: 40px;
 }
 #search{
     margin: 0 auto;
@@ -90,7 +117,7 @@ h3 {
     }
 #killdeathratio{
     height: 100px;
-    width: 800px;
+    width: 100%;
     margin: 0 auto;
     padding: 0;
 }
@@ -98,7 +125,7 @@ h3 {
     background-color: black;
     border: 2px solid white;
     height: 30px;
-    width: 800px;
+    width: 100%;
 }
 #killdeathratio_inner{
     background-color:white;
@@ -118,18 +145,20 @@ h3 {
     margin: 0 auto;
 }
 .mainstat{
-    width: 150px;
+    background: url('/res/border.png');
+    width:  20%;
     height: inherit;
     display:inline-block;
-    border-left: 1px solid white;
+    background-repeat: no-repeat;
+    padding-top: 2px;
+    padding-left: 5px;
+    
 }
 .mainstat h2{
-    padding: 0 0 0 7px;
     margin: 0;
     margin-top: -2px;
 }
 .mainstat h1{
-    padding: 0 0 0 7px;
     margin: 0;
     color: #0e75ec;
     margin-top: -10px !important;

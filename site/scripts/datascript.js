@@ -31,6 +31,11 @@ function parseData_json() {
         
         console.log(data_json);
      });
+      $.getJSON( '/steam/playerstats/' + SteamID, function(player_json) {
+          console.log(player_json)
+          $('#profilename h1').text(player_json.response.players[0].personaname);
+          $('#profilepic').css({background: 'url("' + player_json.response.players[0].avatarfull + '")', backgroundSize: "cover"})
+     });
 };
 
 
