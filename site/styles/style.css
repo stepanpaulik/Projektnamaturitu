@@ -1,5 +1,8 @@
- 
-
+@font-face {
+    font-family: "weapons";
+    src: url(/res/csgo_icons.ttf) format("truetype");
+}
+/* GENERAL */
 body{
     background: black;
     font-family: 'Roboto';
@@ -7,7 +10,6 @@ body{
     margin: 0;
     padding: 0;
     color: white;
-    
 }
 h2 {
     padding: 0;
@@ -22,6 +24,7 @@ h3 {
   box-sizing: border-box;
 }
 
+
 #center{
    position: absolute;
    top: 50%;
@@ -33,7 +36,6 @@ h3 {
     height: 30px;
     display: inline-block;
 }
-
 #logo{
     position: absolute;
     left: 20px;
@@ -163,6 +165,48 @@ h3 {
     color: #0e75ec;
     margin-top: -10px !important;
 }
+#fav_weapons .fav_weapon{
+    display: inline-block;
+    margin: 0px 8px 5px 0px;
+}
+#fav_weapons .weaponnumber{
+    background: white;
+    width: 45px;
+    height: 45px;
+    display: inline-block;
+    vertical-align: top;
+    margin-top: 4px;
+    vertical-align: center;
+    line-height: 45px;
+}
+#fav_weapons .weaponnumber h2{
+    color: black;
+    text-align: center;
+    
+}
+.weaponinfo h3{
+    font-size: 1.6rem
+}
+.weapon_kills{
+    font-size: 1.2rem
+}
+#fav_weapons .weaponinfo{
+    display: inline-block;
+    vertical-align: top;
+    margin-left: 7px;
+}
+#fav_weapons h2{
+    margin-bottom: 10px;
+}
+#fav_weapons .icon{
+    font-family: "weapons";
+    font-size: 3.1rem;
+    display: inline-block;
+    margin-left: 7px;
+    vertical-align: top;
+}
+
+
 @media screen and (max-width: 560px){
     #search{
         width: 100%;
