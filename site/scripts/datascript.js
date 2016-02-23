@@ -1,5 +1,6 @@
 var SteamID;
 var data_json1;
+var weapon_switch = true;
 var weaponsList = [
     "total_kills_knife",
     "total_kills_hegrenade",
@@ -66,20 +67,73 @@ var weaponNames = [
     "galil",
     "molotov"
 ];
-var weaponsPics = [
-    '&#xE007'
-]
+var weaponPics = [
+    '&#xE1F4',
+    '&#xE02C',
+    '&#xE004',
+    '&#xE001',
+    '&#xE002',
+    '&#xE003',
+    '&#xE019',
+    '&#xE011',
+    '&#xE024',
+    '&#xE009',
+    '&#xE007',
+    '&#xE008',
+    '&#xE00A',
+    '&#xE027',
+    '&#xE03C',
+    '&#xE010',
+    '&#xE013',
+    '&#xE020',
+    '&#xE00B',
+    '&#xE026',
+    '&#xE028',
+    '&#xE021',
+    '&#xE022',
+    '&#xE023',
+    '&#xE01C',
+    '&#xE01D',
+    '&#xE01A',
+    '&#xE01E',
+    '&#xE01B',
+    '&#xE00D',
+    '&#xE02E'
+];
 var weaponsData = new Array(weaponsList.length);
 for (var i = 0; i < weaponsList.length; i++) {
     weaponsData[i] = new Array(3);
     weaponsData[i][0] = weaponsList[i];
     weaponsData[i][2] = weaponNames[i];
+    weaponsData[i][3] = weaponPics[i];
 }
+
 
 
 $(document).ready(function() {
     SteamID = $.urlParam('SteamID');
+   
     parseData_json();
+    
+    console.log($('#fav_weapons')[0].scrollHeight)
+    $('#show_more_weapons, #fav_weapons').click(function(){
+        switch(weapon_switch){
+            case true:
+                $('#fav_weapons').animate({
+                    height: $('#fav_weapons')[0].scrollHeight
+                });   
+                $('#show_more_weapons').text("show less");
+                weapon_switch = false;
+            break;
+            case false:
+                $('#fav_weapons').animate({
+                    height: '170px'
+                });
+                $('#show_more_weapons').text("show more");
+                weapon_switch = true;
+            break;
+        }            
+    });
 });
 
 
@@ -109,7 +163,7 @@ function parseData_json() {
         weaponsData.sort(sortLists);
         console.log(weaponsData)
         for(i = weaponsData.length-1; i>=0; i--){
-            $('#fav_weapons').append('<div class="fav_weapon"><div class="weaponnumber"><h2>'+(weaponsData.length-i)+'</h2></div><div class="weaponinfo"><h3>'+weaponsData[i][2]+'</h3><div class="weapon_kills">'+weaponsData[i][1]+'</div></div><div class="icon">'+'&#xE025'+'</div></div>');
+            $('#fav_weapons').append('<div class="fav_weapon"><div class="weaponnumber"><h2>'+(weaponsData.length-i)+'</h2></div><div class="weaponinfo"><h3>'+weaponsData[i][2]+'</h3><div class="weapon_kills">'+ weaponsData[i][1] +'<img src="/res/hitmarker.png" class="hitmarker"></div></div><div class="icon">' + weaponsData[i][3] + '</div></div>');
         }
         
         
