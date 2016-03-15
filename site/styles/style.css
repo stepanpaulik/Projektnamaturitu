@@ -8,7 +8,7 @@ body{
     font-family: 'Roboto';
     font-weight: 100;
     margin: 0;
-    padding: 0;
+    padding: 10px;
     color: white;
 }
 h2, h3{
@@ -22,7 +22,14 @@ h1{
 * {
   box-sizing: border-box;
 }
-
+a{
+    color: white;
+    text-decoration: none;
+}
+a:visited{
+    color: white;
+    text-decoration: none;
+}
 
 #center{
    position: absolute;
@@ -59,14 +66,16 @@ h1{
     font-weight: 100 !important;
     font-size: 60px;
 }
+#profilename p{
+    margin-top: -45px;
+}
 .container{
     background: red;
     height: 30px;
     display: inline-block;
 }
 #container_data{
-    height: 600px;
-    width: 800px;;
+    width: 800px;
     background-color: black;
     margin: 0 auto;
     margin-top: 40px;
@@ -77,55 +86,54 @@ h1{
     text-align: center;
 }
 #search h1{
-        color: white;
-        font-weight: 100;
-        font-size: 2rem;
-        
-    }
+    color: white;
+    font-weight: 100;
+    font-size: 2rem;
+}
 #search input[type="text"]{
-        color: #052F43;
-        width:89%;
-        height: 35px;
-        background-color: white;
-        padding-left: 5px;
-        transition: all .5s;
-        display: inline-block;
-        border: 0;
-        vertical-align: top;
-        outline: 0;
+    color: #052F43;
+    width:89%;
+    height: 35px;
+    background-color: white;
+    padding-left: 5px;
+    transition: all .5s;
+    display: inline-block;
+    border: 0;
+    vertical-align: top;
+    outline: 0;
     }
 #search input[type="text"]:focus {
-        box-shadow: inset black 0px 0px 5px;
-        outline: 0;
-    }
-
-    #search input[type="submit"]{
-        width: 10%;
-        display: inline-block;
-        height: 35px;
-        background: white;
-        border: 0;
-        cursor: pointer;
-        color: #052F43;
-        font-size: 1.3rem;
-        vertical-align: top;
-        transition: all .5s;
-    }
+    box-shadow: inset black 0px 0px 5px;
+    outline: 0;
+}
+#search input[type="submit"]{
+    width: 10%;
+    display: inline-block;
+    height: 35px;
+    background: white;
+    border: 0;
+    cursor: pointer;
+    color: #052F43;
+    font-size: 1.3rem;
+    vertical-align: top;
+    transition: all .5s;
+}
 #search input[type="submit"]:hover{
         box-shadow: inset black 0px 0px 5px;       
     }
+.headline{
+    background: url('/res/border.png');
+    background-repeat: no-repeat;
+    margin-bottom: 8px;
+    padding-top: 2px;
+    padding-left: 5px;
+}
 #killdeathratio{
     width: 100%;
     margin: 0 auto;
     padding: 0;
     vertical-align: center;
     line-height: 28px;
-}
-#killdeathratio h2{
-    background: url('/res/border.png');
-    background-repeat: no-repeat;
-    padding-top: 2px;
-    padding-left: 5px;
 }
 #killdeathratio_outer{
     background: black;
@@ -174,9 +182,9 @@ h1{
     opacity: 1;
 }
 #mainstats{
-    height: 60px;
-    width: 800px;
+    width: 100%;
     margin: 0 auto;
+    margin-bottom: 10px;
 }
 .mainstat{
     background: url('/res/border.png');
@@ -196,61 +204,47 @@ h1{
     color: #0e75ec;
     margin-top: -10px !important;
 }
-#fav_weapons_headline{
-    background: url('/res/border.png');
-    background-repeat: no-repeat;
-    margin-top: 20px;
-    padding-top: 2px;
-    padding-left: 5px;
-}
 #fav_weapons{
-    height: 170px;
+    height: 180px;
     overflow: hidden;
     cursor: pointer;
 }
 #fav_weapons .fav_weapon{
     display: inline-block;
-    margin: 0px 8px 5px 0px;
+    margin: 5px 8px 5px 0px;
     width: 49%;
+    height: 45px;
+    overflow: hidden;
+    border-right: 1px solid white;
+    padding-right: 8px;
 }
 #fav_weapons .weaponnumber{
     background: white;
     width: 45px;
     height: 45px;
     display: inline-block;
-    vertical-align: top;
-    margin-top: 4px;
-    vertical-align: center;
     line-height: 45px;
 }
 #fav_weapons .weaponnumber h2{
     color: black;
     text-align: center;
-    
 }
-.weaponinfo h3{
-    font-size: 1.6rem
-}
-.weapon_kills{
-    font-size: 1.2rem
-}
+
 #fav_weapons .weaponinfo{
     display: inline-block;
     vertical-align: top;
     margin-left: 7px;
+    font-weight: 300;
 }
-#fav_weapons h2{
-    margin-bottom: 10px;
-}
-.icon{
+#fav_weapons .icon{
     font-family: "weapons";
     font-size: 3.1rem;
     display: inline-block;
-    margin-left: 7px;
     vertical-align: top;
+    float: right;
 }
 #fav_weapons .hitmarker{
-    width: 13px;
+    width: 10px;
     margin-left: 3px;
 }
 .show_more{
@@ -266,6 +260,7 @@ h1{
     margin: 0 7px 7px 0;
     overflow: hidden;
     cursor: pointer;
+    background-position: center;
 }
 .map_img{
     width: 100%;
@@ -291,39 +286,118 @@ h1{
     font-weight: 300;
 }
 .map_info{
-    font-size: 1.2rem;
     padding-top: 5px;
     width: 100%;
     height: 60px;
     text-align: center;
 }
-#last_match h2{
-    background: url('/res/border.png');
-    background-repeat: no-repeat;
-    padding-top: 2px;
-    padding-left: 5px;
+#last_match_favweapon{
+    display: inline-block;
+    width: 33%;
+    vertical-align: middle;
+    margin-top: 12px;
+}
+#last_match .icon{
+    font-family: "weapons";
+    font-size: 3.1rem;
+    width: 25%;
+    display: inline-block;
+}
+#last_match_statistval{
+    margin-top: 8px;
+    width: 75%;
+    display: inline-block;
 }
 .last_match_stat{
-    width: 49%;
+    width: 31%;
     display: inline-block;
-    font-size: 1.3rem;
+    margin-right: 12px;
 }
-.last_match_stat b{
+b{
     font-weight: 300;
+    float: right;
 }
 #last_match_result{
-    font-size: 1.3rem;
     border-left: 1px solid;
-    padding-left: 4px;
+    padding: 4px;
+    margin: 0 10px 5px 0;
 }
-#weapon_name_fav{
-    font-size: 2rem;
+#last_match {
+    margin-bottom: 15px;
+}
+.other_stat{
     display: inline-block;
-    height: 100%;
-    vertical-align: center;
+    width: 33%;
+}
+.other_stat_value{
+    float: right;
+    margin-right: 12px;
+    font-weight: 300;
+}
+.weapon_sidestats{
+    width: 100%;
+    margin-top: 10px;
+}
+.any_stat{
+    font-weight: 300;
+    display: inline-block;
 }
 @media screen and (max-width: 560px){
     #search{
         width: 100%;
     }
 }
+@media screen and (max-width: 820px){
+    #container_data{
+        width: 100% !important;
+    }
+    #last_match .icon{
+        width: 99%;
+        display: block;
+    }
+    #last_match_statistval{
+        width: 99%;
+        display: block;
+    }
+    .last_match_stat{
+        width: 100%;
+    }
+}
+@media screen and (max-width: 810px){
+    .fav_weapon{
+        width: 100% !important;
+    }
+    
+}
+@media screen and (max-width: 760px) and (min-width: 737px){
+    .fav_map{
+        width: 49% !important;
+    }
+}
+@media screen and (max-width: 737px) and (min-width: 686px){
+    .mainstat{
+        width: 33% !important;
+    }
+
+}
+@media screen and (max-width: 686px) {
+    .mainstat{
+        width: 49% !important;
+    }
+}
+@media screen and (max-width: 737px){
+    .fav_map{
+        width: 100% !important;
+    }
+}
+@media screen and (max-width: 737px) and (min-width:600px){
+     .other_stat {
+        width:50%;
+    } 
+}
+@media screen and (max-width: 600px){
+    .other_stat {
+        width:100%;
+    } 
+}
+

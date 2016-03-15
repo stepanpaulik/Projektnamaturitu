@@ -157,6 +157,52 @@ var mapRounds = [
     "total_rounds_map_de_nuke",
     "total_rounds_map_de_aztec"
 ]
+var statsList = [
+    "total_kills",
+    "total_deaths",
+    "total_kills_headshot",
+    "total_money_earned",
+    "total_damage_done",
+    "total_contribution_score",
+    "total_planted_bombs",
+    "total_defused_bombs",
+    "total_matches_played",
+    "total_matches_won",
+    "total_rounds_played",
+    "total_mvps",
+    "total_weapons_donated",
+    "total_kills_enemy_weapon",
+    "total_kills_enemy_blinded",
+    "total_kills_knife_fight",
+    "total_kills_against_zoomed_sniper",
+    "total_shots_fired",
+    "total_shots_hit",
+    "total_wins_pistolround",
+    "total_kills_taser"
+]
+var statsName = [
+    "Total kills",
+    "Total deaths",
+    "Headshots",
+    "Money earned",
+    "Total damage",
+    "Total score",
+    "Bombs planted",
+    "Bombs defused",
+    "Matches played",
+    "Matches won",
+    "Rounds played",
+    "MVPs",
+    "Total weapons given",
+    "Kills with enemy weapon",
+    "Blinded enemies killed",
+    "Killed in a knife fight",
+    "Aiming snipers killed",
+    "Shots fired",
+    "Shots hit",
+    "Pistol rounds won",
+    "Enemies tasered"
+]
 var mapData = new Array(mapList.length);
 for (var i = 0; i < mapData.length; i++) {
     mapData[i] = new Array(3);
@@ -179,16 +225,22 @@ $(document).ready(function() {
     $('#show_more_weapons, #fav_weapons').click(function(){
         switch(weapon_switch){
             case true:
+                $('.fav_weapon').animate({
+                    height: $('.fav_weapon')[0].scrollHeight
+                });
                 $('#fav_weapons').animate({
-                    height: $('#fav_weapons')[0].scrollHeight
-                });   
+                    height: $('#fav_weapons')[0].scrollHeight*2.13
+                }); 
                 $('#show_more_weapons').text("show less");
                 weapon_switch = false;
             break;
             case false:
                 $('#fav_weapons').animate({
-                    height: '170px'
+                    height: '180px'
                 });
+                $('.fav_weapon').animate({
+                    height: 45+"px"
+                }); 
                 $('#show_more_weapons').text("show more");
                 weapon_switch = true;
             break;
@@ -198,7 +250,7 @@ $(document).ready(function() {
         switch(map_switch){
             case true:
                 $('.fav_map').animate({
-                    height: $('.fav_map')[0].scrollHeight
+                    height: $('.fav_map')[0].scrollHeight*0.92
                 });   
                 $('#show_more_maps').text("show less");
                 map_switch = false;
@@ -244,28 +296,36 @@ function parseData_json() {
         mapData.sort(sortLists);
         weaponsData.sort(sortLists);
     
-        for(i = weaponsData.length-1; i>=0; i--){
-            $('#fav_weapons').append('<div class="fav_weapon"><div class="weaponnumber"><h2>'+(weaponsData.length-i)+'</h2></div><div class="weaponinfo"><h3>'+weaponsData[i][2]+'</h3><div class="weapon_kills">'+ weaponsData[i][1] +'<img src="/res/hitmarker.png" class="hitmarker"></div></div><div class="icon">' + weaponsData[i][3] + '</div></div>');
+        for(i = weaponsData.length-1; i>=1; i--){
+            $('#fav_weapons').append('<div class="fav_weapon"><div class="weaponnumber"><h2>'+(weaponsData.length-i)+'</h2></div><div class="weaponinfo"><h3>'+weaponsData[i][2]+'</h3><div class="weapon_kills">'+ weaponsData[i][1] +'<img src="/res/hitmarker.png" class="hitmarker"></div></div><div class="icon">' + weaponsData[i][3] + '</div><div class="weapon_sidestats">shots: <div class="any_stat">' + weaponsData[i][4] + '</div><br>hits: <div class="any_stat">' + weaponsData[i][5] + '</div><br>accuracy: <div class="any_stat">' + (Math.round(((weaponsData[i][5]/weaponsData[i][4])*100) * 10) / 10) + '%</div></div>');
         }
         for(i = mapData.length-1; i>=0; i--){
-            $('#fav_maps').append('<div class="fav_map"><div class="map_img" style="background: url(\'res/'+mapData[i][2]+'.png\'); background-size: cover"><div class="map_name">'+mapData[i][2]+'</div><div class="map_wins">'+mapData[i][1]+'w</div></div><div class="map_info">rounds played: ' + mapData[i][3] +  '<br>win rate: ' + (mapData[i][1]*100/mapData[i][3]).toFixed() + '%</div></div>');
+            $('#fav_maps').append('<div class="fav_map"><div class="map_img" style="background: url(\'res/'+mapData[i][2]+'.png\'); background-size: cover"><div class="map_name">'+mapData[i][2]+'</div><div class="map_wins">'+mapData[i][1]+'w</div></div><div class="map_info">rounds played: <div class="any_stat">' + mapData[i][3] +  '</div><br>win rate: <div class="any_stat">' + (mapData[i][1]*100/mapData[i][3]).toFixed() + '%</div></div></div>');
         }
         color = "white";
         switch(lastMatchResult(data_json)){
             case "defeat":
                 color = "#FF4772"
+                bgcolor = "(255,71,114,0.2)"
             break;
             case "win":
                 color = "#A3FF4D"
+                bgcolor = "(163,255,77, 0.2)"
             break;
         }
         if(search("last_match_favweapon_kills", data_json)!=0){
-           $("#last_match").append('<h2>Last Match</h2><div id="last_match_stats"><div id="last_match_result" style="border-color: ' + color + '"> ' + search("last_match_wins",data_json) + " : " + (search("last_match_rounds", data_json) - search("last_match_wins",data_json)) + ' - ' + lastMatchResult(data_json) + '</div><div id="last_match_favweapon"><div class="icon">' + weaponPics[favWeaponPosition] + '</div><div id="weapon_name_fav">' + weaponNames[favWeaponPosition] + '</div> kills:' + search("last_match_favweapon_kills",data_json) + ' accuracy: ' +(search("last_match_favweapon_hits",data_json)/search("last_match_favweapon_shots",data_json)).toFixed(2) + '%</div><div class="last_match_stat">killdeath ratio: <b>' + (search("last_match_kills",data_json)/search("last_match_deaths",data_json)).toFixed(2)+ '</b></div><div class="last_match_stat">kills: <b>' + search("last_match_kills",data_json) + '</b></div><div class="last_match_stat">deaths: <b>' + search("last_match_deaths",data_json) + '</b></div><div class="last_match_stat">damage done: <b>' + search("last_match_damage", data_json) + 'hp</b></div><div class="last_match_stat">money spent: <b>' + search("last_match_money_spent", data_json) + '$</b></div><div class="last_match_stat">MVPs: <b>' + search("last_match_mvps",data_json) + '&#9734;</b></div></div>'); 
+           $("#last_match").append('<h2 class="headline">Last Match</h2><div id="last_match_stats"><div id="last_match_result" style="border-color: ' + color + ';background:rgba' + bgcolor + '"> <h2>' + search("last_match_wins",data_json) + " : " + (search("last_match_rounds", data_json) - search("last_match_wins",data_json)) + ' - ' + lastMatchResult(data_json) + '</h2></div><div class="icon">' + weaponPics[favWeaponPosition] + '</div><div id="last_match_statistval"><div class="last_match_stat">Fav. weapon: <b>' + weaponNames[favWeaponPosition] + '</b></div><div class="last_match_stat">Fav. weapon kills: <b>' + search("last_match_favweapon_kills",data_json) + '</b></div><div class="last_match_stat">Accuracy: <b>' +(search("last_match_favweapon_hits",data_json)*100/search("last_match_favweapon_shots",data_json)).toFixed(0) + '%</b></div><div class="last_match_stat">K/D ratio: <b>' + (search("last_match_kills",data_json)/search("last_match_deaths",data_json)).toFixed(2)+ '</b></div><div class="last_match_stat">Kills: <b>' + search("last_match_kills",data_json) + '</b></div><div class="last_match_stat">Deaths: <b>' + search("last_match_deaths",data_json) + '</b></div><div class="last_match_stat">Damage done: <b>' + search("last_match_damage", data_json) + 'hp</b></div><div class="last_match_stat">Money spent: <b>' + search("last_match_money_spent", data_json) + '$</b></div><div class="last_match_stat">MVPs: <b>' + search("last_match_mvps",data_json) + '&#9734;</b></div></div></div>'); 
+        }
+        
+        for(i = 0; i < statsList.length; i++){
+            $("#other_stats").append('<div class="other_stat">' + statsName[i] + ': <div class="other_stat_value">' + search(statsList[i],data_json) + '</div></div>')
         }
         
      });
       $.getJSON( '/steam/playerstats/' + SteamID, function(player_json) {
+          $('#profile').html('<a href="' + player_json.response.players[0].profileurl + '"><div id="profilepic"></div><div id="profilename"><h1></h1><p></p></div></a>')
           $('#profilename h1').text(player_json.response.players[0].personaname);
+          $('#profilename p').text(player_json.response.players[0].realname);
           $('#profilepic').css({background: 'url("' + player_json.response.players[0].avatarfull + '")', backgroundSize: "cover"})
      });
 };
@@ -281,10 +341,8 @@ $.urlParam = function(name){
     }
 }
 function search(val, json){
-        for(var i = 0; i<=json.playerstats.stats.length; i++){
-            if(val === undefined || val === null){
-                return 0;
-            }else if(val == json.playerstats.stats[i].name){
+        for(var i = 0; i<json.playerstats.stats.length; i++){
+            if(val == json.playerstats.stats[i].name){
                 return json.playerstats.stats[i].value;
             }
         }
@@ -293,6 +351,9 @@ function search(val, json){
 function getWeaponsStats(json){
             for(var i = 0; i<weaponsList.length; i++){
             weaponsData[i][1] = search(weaponsList[i], json);
+            var name = weaponsList[i].split('_');
+            weaponsData[i][4] = search('total_shots_' + name[2], json);
+            weaponsData[i][5] = search('total_hits_' + name[2], json);
         }
 }
 function getMapStats(json){

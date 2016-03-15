@@ -9,7 +9,6 @@
     <link rel="shortcut icon" href="images/favicon.ico">
     <link rel="stylesheet" href="styles/style.css">
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script src="scripts/script.js"></script>
     <script src="scripts/datascript.js"></script>
     
 </head>
@@ -18,11 +17,10 @@
 <body>
     <div id="container_data">
         <div id="profile">
-            <div id="profilepic"></div>
-            <div id="profilename"><h1></h1></div>
+            
         </div>
         <div id="killdeathratio">
-            <h2>K/D RATIO</h2>
+            <h2 class="headline">K/D RATIO</h2>
             <div id="killdeathratio_container"><div id="killdeathratio_outer"></div>
             <div id="killdeathratio_inner"></div></div>
         </div>
@@ -32,17 +30,16 @@
             <div id="headshot" class="mainstat"></div>
             <div id="timeplayed" class="mainstat"></div><div id="winrate" class="mainstat"></div>
         </div>
-        <h2 id="fav_weapons_headline">Favourite Weapons</h2>
-        
+        <h2 class="headline">Favourite Weapons</h2>
         <div id="fav_weapons">
         </div>
             <div class="show_more" id="show_more_weapons">show more</div>
-            <h2 id="fav_weapons_headline">Favourite Maps</h2>
-            <div id="fav_maps">
-            </div>
+            <h2 class="headline">Favourite Maps</h2>
+            <div id="fav_maps"></div>
             <div class="show_more" id="show_more_maps">show more</div>
             <div id="last_match"></div>
-    </div>
-    
+            <h2 id="other_stats_headline" class="headline">Other Stats</h2>
+            <div id="other_stats"></div>
+    </div>    
 </body>    
 </html>
