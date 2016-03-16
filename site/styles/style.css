@@ -31,54 +31,12 @@ a:visited{
     text-decoration: none;
 }
 
-#center{
-   position: absolute;
-   top: 50%;
-   margin-top: -65px;
-   left: 0;
-   width: 100%;
-}
-.container{
-    height: 30px;
-    display: inline-block;
-}
-#logo{
-    position: absolute;
-    left: 20px;
-    top: 20px;
-}
-#profile{
-    width: 100%;
-}
-#profilepic{
-    margin: 0 auto;
-    width: 90px;
-    height: 90px;
-    border-radius: 50%;
-    border: 2px solid white;  
-}
-#profilename{
-    width: 100%;
-    text-align: center;
-    margin-top: -30px;
-}
-#profilename h1{
-    font-weight: 100 !important;
-    font-size: 60px;
-}
-#profilename p{
-    margin-top: -45px;
-}
-.container{
-    background: red;
-    height: 30px;
-    display: inline-block;
-}
-#container_data{
-    width: 800px;
-    background-color: black;
-    margin: 0 auto;
-    margin-top: 40px;
+/* INDEX */
+.center{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 #search{
     margin: 0 auto;
@@ -119,8 +77,26 @@ a:visited{
     transition: all .5s;
 }
 #search input[type="submit"]:hover{
-        box-shadow: inset black 0px 0px 5px;       
-    }
+    box-shadow: inset black 0px 0px 5px;       
+}
+
+/*DATA*/
+
+#container_data{
+    width: 800px;
+    background-color: black;
+    margin: 0 auto;
+    margin-top: 40px;
+}
+.show_more{
+    width: 100%;
+    text-align: right;   
+    cursor: pointer;
+}
+b{
+    font-weight: 300;
+    float: right;
+}
 .headline{
     background: url('/res/border.png');
     background-repeat: no-repeat;
@@ -128,6 +104,32 @@ a:visited{
     padding-top: 2px;
     padding-left: 5px;
 }
+
+/*DATA-PROFILE*/
+#profile{
+    width: 100%;
+}
+#profilepic{
+    margin: 0 auto;
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    border: 2px solid white;  
+}
+#profilename{
+    width: 100%;
+    text-align: center;
+    margin-top: -30px;
+}
+#profilename h1{
+    font-weight: 100 !important;
+    font-size: 60px;
+}
+#profilename p{
+    margin-top: -45px;
+}
+
+/*DATA-KILLDEATHRATIO*/
 #killdeathratio{
     width: 100%;
     margin: 0 auto;
@@ -181,6 +183,8 @@ a:visited{
 #killdeathratio_container:hover #deaths_mouse{
     opacity: 1;
 }
+
+/*DATA-MAINSTATS*/
 #mainstats{
     width: 100%;
     margin: 0 auto;
@@ -204,6 +208,8 @@ a:visited{
     color: #0e75ec;
     margin-top: -10px !important;
 }
+
+/*DATA-FAVOURITE_WEAPONS*/
 #fav_weapons{
     height: 180px;
     overflow: hidden;
@@ -247,12 +253,8 @@ a:visited{
     width: 10px;
     margin-left: 3px;
 }
-.show_more{
-    width: 100%;
-    text-align: right;   
-    cursor: pointer;
-}
 
+/*DATA-FAVOURITE_MAPS*/
 .fav_map{
     width: 32%;
     height: 150px;
@@ -291,6 +293,11 @@ a:visited{
     height: 60px;
     text-align: center;
 }
+.any_stat{
+    font-weight: 300;
+    display: inline-block;
+}
+/*DATA-LAST_MATCH*/
 #last_match_favweapon{
     display: inline-block;
     width: 33%;
@@ -313,10 +320,6 @@ a:visited{
     display: inline-block;
     margin-right: 12px;
 }
-b{
-    font-weight: 300;
-    float: right;
-}
 #last_match_result{
     border-left: 1px solid;
     padding: 4px;
@@ -325,23 +328,30 @@ b{
 #last_match {
     margin-bottom: 15px;
 }
+
+/*DATA-OTHER_STATS*/
 .other_stat{
     display: inline-block;
-    width: 33%;
-}
-.other_stat_value{
-    float: right;
+    width: 31%;
     margin-right: 12px;
-    font-weight: 300;
 }
 .weapon_sidestats{
     width: 100%;
     margin-top: 10px;
 }
-.any_stat{
-    font-weight: 300;
-    display: inline-block;
+#credits{
+    text-align: center;
+    width: 100%;
+    padding-top: 50px;
 }
+#not_found{
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/*RESPONSIVITY*/
 @media screen and (max-width: 560px){
     #search{
         width: 100%;
@@ -349,11 +359,12 @@ b{
 }
 @media screen and (max-width: 820px){
     #container_data{
-        width: 100% !important;
+        width: 100%;
     }
     #last_match .icon{
         width: 99%;
         display: block;
+        text-align: center;
     }
     #last_match_statistval{
         width: 99%;
@@ -366,33 +377,34 @@ b{
 @media screen and (max-width: 810px){
     .fav_weapon{
         width: 100% !important;
+        display: block;
     }
     
 }
 @media screen and (max-width: 760px) and (min-width: 737px){
     .fav_map{
-        width: 49% !important;
+        width: 49%t;
     }
 }
 @media screen and (max-width: 737px) and (min-width: 686px){
     .mainstat{
-        width: 33% !important;
+        width: 33%;
     }
 
 }
 @media screen and (max-width: 686px) {
     .mainstat{
-        width: 49% !important;
+        width: 49%;
     }
 }
 @media screen and (max-width: 737px){
     .fav_map{
-        width: 100% !important;
+        width: 100%;
     }
 }
 @media screen and (max-width: 737px) and (min-width:600px){
      .other_stat {
-        width:50%;
+        width:47%;
     } 
 }
 @media screen and (max-width: 600px){

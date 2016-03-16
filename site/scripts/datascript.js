@@ -2,6 +2,8 @@ var SteamID;
 
 var weapon_switch = true;
 var map_switch = true;
+
+/*statická data pro zbraně, mapy atd.*/
 var weaponID = [
     "42",
     "44",
@@ -203,6 +205,8 @@ var statsName = [
     "Pistol rounds won",
     "Enemies tasered"
 ]
+
+/*vyplnění arrayů zbraní již existujícími, "statickými" daty...*/
 var mapData = new Array(mapList.length);
 for (var i = 0; i < mapData.length; i++) {
     mapData[i] = new Array(3);
@@ -219,9 +223,10 @@ for (var i = 0; i < weaponsList.length; i++) {
 }
 
 $(document).ready(function() {
+    
     SteamID = $.urlParam('SteamID');
     parseData_json();
-    
+    /*animace bloku se zbraněmi a mapami*/
     $('#show_more_weapons, #fav_weapons').click(function(){
         switch(weapon_switch){
             case true:
@@ -264,12 +269,17 @@ $(document).ready(function() {
             break;
         }            
     });
+  
 });
 
 
 function parseData_json() {
     $.getJSON( '/steam/stats/' + SteamID, function(data_json) {
-        
+        /*jednoduchá kontrola, jestli existuje JSON, tzn. jestli user zadal správné ID*/
+        if(data_json.playerstats == null){
+            $('body').html('<div id="not_found"><h2>Player not found</h2></div>')
+        }
+        /*natažení různě upravených dat na stránku*/
         var deathratio = (search("total_kills", data_json) / search("total_deaths", data_json)).toFixed(2);
         $('#killdeathratio_inner').html('<h3 id="killdeathratio_number">' + deathratio + '</h3><div id="kills_mouse"><h3>' + search("total_kills", data_json) + 'kills</h3></div><div id="deaths_mouse"><h3>' + search("total_deaths", data_json) + 'deaths</h3></div>')
         
@@ -288,11 +298,13 @@ function parseData_json() {
 
         var totkd = (search("total_kills", data_json) * 100)/(search("total_kills", data_json) + search("total_deaths", data_json));
         $('#killdeathratio_inner').css({width: totkd+"%"});
-        
+
         getWeaponsStats(data_json);
         getMapStats(data_json);
         var favWeaponPosition = getFavWeapon(data_json);
         lastMatchResult(data_json);
+        
+        /*srovnání všech úrovní polí*/
         mapData.sort(sortLists);
         weaponsData.sort(sortLists);
     
@@ -303,6 +315,8 @@ function parseData_json() {
             $('#fav_maps').append('<div class="fav_map"><div class="map_img" style="background: url(\'res/'+mapData[i][2]+'.png\'); background-size: cover"><div class="map_name">'+mapData[i][2]+'</div><div class="map_wins">'+mapData[i][1]+'w</div></div><div class="map_info">rounds played: <div class="any_stat">' + mapData[i][3] +  '</div><br>win rate: <div class="any_stat">' + (mapData[i][1]*100/mapData[i][3]).toFixed() + '%</div></div></div>');
         }
         color = "white";
+        
+        /*funkce na změnu barvy v last match, v závislosti na prohře či výhře*/
         switch(lastMatchResult(data_json)){
             case "defeat":
                 color = "#FF4772"
@@ -313,14 +327,14 @@ function parseData_json() {
                 bgcolor = "(163,255,77, 0.2)"
             break;
         }
+        
         if(search("last_match_favweapon_kills", data_json)!=0){
            $("#last_match").append('<h2 class="headline">Last Match</h2><div id="last_match_stats"><div id="last_match_result" style="border-color: ' + color + ';background:rgba' + bgcolor + '"> <h2>' + search("last_match_wins",data_json) + " : " + (search("last_match_rounds", data_json) - search("last_match_wins",data_json)) + ' - ' + lastMatchResult(data_json) + '</h2></div><div class="icon">' + weaponPics[favWeaponPosition] + '</div><div id="last_match_statistval"><div class="last_match_stat">Fav. weapon: <b>' + weaponNames[favWeaponPosition] + '</b></div><div class="last_match_stat">Fav. weapon kills: <b>' + search("last_match_favweapon_kills",data_json) + '</b></div><div class="last_match_stat">Accuracy: <b>' +(search("last_match_favweapon_hits",data_json)*100/search("last_match_favweapon_shots",data_json)).toFixed(0) + '%</b></div><div class="last_match_stat">K/D ratio: <b>' + (search("last_match_kills",data_json)/search("last_match_deaths",data_json)).toFixed(2)+ '</b></div><div class="last_match_stat">Kills: <b>' + search("last_match_kills",data_json) + '</b></div><div class="last_match_stat">Deaths: <b>' + search("last_match_deaths",data_json) + '</b></div><div class="last_match_stat">Damage done: <b>' + search("last_match_damage", data_json) + 'hp</b></div><div class="last_match_stat">Money spent: <b>' + search("last_match_money_spent", data_json) + '$</b></div><div class="last_match_stat">MVPs: <b>' + search("last_match_mvps",data_json) + '&#9734;</b></div></div></div>'); 
         }
         
-        for(i = 0; i < statsList.length; i++){
-            $("#other_stats").append('<div class="other_stat">' + statsName[i] + ': <div class="other_stat_value">' + search(statsList[i],data_json) + '</div></div>')
-        }
-        
+            for(i = 0; i < statsList.length; i++){
+                $("#other_stats").append('<div class="other_stat">' + statsName[i] + ': <b>' + search(statsList[i],data_json) + '</b></div>')
+            }
      });
       $.getJSON( '/steam/playerstats/' + SteamID, function(player_json) {
           $('#profile').html('<a href="' + player_json.response.players[0].profileurl + '"><div id="profilepic"></div><div id="profilename"><h1></h1><p></p></div></a>')
@@ -330,7 +344,7 @@ function parseData_json() {
      });
 };
         
-
+/* ze Stackoverflow, najde SteamID v url*/
 $.urlParam = function(name){
     var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.href);
     if (results==null){
@@ -340,6 +354,7 @@ $.urlParam = function(name){
        return results[1] || 0;
     }
 }
+/* prohledá json a najde konkrétní stat, v případě neexistence (tzn. člověk např. ještě nehrál na hledané mapě) hodí 0*/
 function search(val, json){
         for(var i = 0; i<json.playerstats.stats.length; i++){
             if(val == json.playerstats.stats[i].name){
@@ -348,6 +363,7 @@ function search(val, json){
         }
         return 0;
 }
+/*vyplnění polí daty z api*/
 function getWeaponsStats(json){
             for(var i = 0; i<weaponsList.length; i++){
             weaponsData[i][1] = search(weaponsList[i], json);
@@ -370,6 +386,7 @@ function getFavWeapon(json){
             }
         }
 }
+/*zjistí zda-li poslední hra byla výhra/prohra/remíza*/
 function lastMatchResult(json){
         if((search("last_match_rounds",json)-search("last_match_wins",json)) > search("last_match_wins",json)) {
             return "defeat";
@@ -382,6 +399,7 @@ function lastMatchResult(json){
         }
     
 }
+/* srovná pole podle obsahu 1 buňky "druhé dimenze" pole, tzn srovná celou 1. dimenzi pole podle obsahu této buňky (která je vždy relevantní, u map je to počet výher na mapě, u zbraní počet zabití s danou zbraní)*/
 function sortLists(a, b) {
     if (a[1] === b[1]) {
         return 0;
