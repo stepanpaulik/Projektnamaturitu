@@ -312,7 +312,7 @@ b{
 }
 #last_match_statistval{
     margin-top: 8px;
-    width: 75%;
+    width: 73%;
     display: inline-block;
 }
 .last_match_stat{
@@ -371,7 +371,7 @@ b{
         display: block;
     }
     .last_match_stat{
-        width: 100%;
+        width: 97%;
     }
 }
 @media screen and (max-width: 810px){
@@ -405,11 +405,14 @@ b{
 @media screen and (max-width: 737px) and (min-width:600px){
      .other_stat {
         width:47%;
-    } 
+    }
 }
 @media screen and (max-width: 600px){
     .other_stat {
         width:100%;
     } 
+    .last_match_stat{
+        width: 100%;
+    }
 }
 
