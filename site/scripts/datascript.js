@@ -280,6 +280,9 @@ function parseData_json() {
             $('body').html('<div id="not_found"><h2>Player not found</h2></div>')
         }
         /*natažení různě upravených dat na stránku*/
+        
+        $('#container_data').css('display', 'block');
+        
         var deathratio = (search("total_kills", data_json) / search("total_deaths", data_json)).toFixed(2);
         $('#killdeathratio_inner').html('<h3 id="killdeathratio_number">' + deathratio + '</h3><div id="kills_mouse"><h3>' + search("total_kills", data_json) + 'kills</h3></div><div id="deaths_mouse"><h3>' + search("total_deaths", data_json) + 'deaths</h3></div>')
         
