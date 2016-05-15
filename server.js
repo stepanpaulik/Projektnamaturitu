@@ -2,9 +2,6 @@ var request = require('request');
 var express = require('express');
 var app = express();
 
-var server_port = process.env.OPENSHIFT_NODEJS_PORT
-var server_ip_address = process.env.OPENSHIFT_NODEJS_IP
-
 app.use(express.static('site'));
 
 var appid = 730;
@@ -30,4 +27,4 @@ app.get('/steam/playerstats/:steamId', function(req, res){
   });
 }); 
 
-app.listen(server_port); 
+app.listen(4000); 
